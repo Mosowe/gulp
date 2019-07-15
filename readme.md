@@ -62,9 +62,9 @@ gulp.task('connect',function(){
 ```
 #### less文件转css，自动补全css前缀，px转rem：gulp-less，gulp-postcss，autoprefixer，gulp-px2rem-plugin
 ###### 安装
-`npm install gulp-less --save-dev`
-`npm install gulp-postcss --save-dev`
-`npm install autoprefixer --save-dev`
+`npm install gulp-less --save-dev`<br />
+`npm install gulp-postcss --save-dev`<br />
+`npm install autoprefixer --save-dev`<br />
 `npm install gulp-px2rem-plugin --save-dev`
 ###### 配置
 ```javascript
@@ -125,5 +125,6 @@ gulp.task('imagemin', function() {
         .pipe(gulp.dest('dist/images'))
 });
 ```
-
+## 运行gulp
+`gulp + 任务名`
 
