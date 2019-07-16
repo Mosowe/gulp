@@ -25,10 +25,15 @@ gulp.task('default', function() {
 
 ## 常用API
 > gulp.src(filePath/pathArr) ：指向指定路径的所有文件,找到目标源文件，将数据读取到gulp的内存中；
+
 > gulp.dest(dirPath/pathArr) ：指向指定的所有文件夹，将文件输出到指定的文件夹中；
+
 > gulp.task(name, [deps], fn) ：定义一个任务，`deps`：数组，如果该任务需要等待其他一个（多个）任务完成后执行，则将被等待的任务name写入deps；
+
 > gulp.watch() ：监视文件的变化；
+
 > gulp.series() ：用于串行（顺序）执行：存放task的name，按照顺序执行；
+
 > gulp.parallel() ：用于并行执行：存放task的name，并行执行；
 
 ## 常用插件
