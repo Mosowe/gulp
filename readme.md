@@ -76,13 +76,6 @@ const less = require('gulp-less')
 
 gulp.task('less', function () {
   var processors = [
-    px2rem({
-        width_design: 750, // 设计稿宽度。默认值640
-        valid_num: 2, // 生成rem后的小数位数。默认值4
-        pieces: 10, // 将整屏切份。默认为10，相当于10rem = width_design(设计稿宽度)
-        ignore_px: [1,2], // 让部分px不在转换成rem。默认为空数组
-        ignore_selector: [] // 让部分选择器不在转换为rem。默认为空数组
-    }),
     autoprefixer({ // 自动补全
       browsers: [
         "iOS >= 8",
@@ -93,6 +86,13 @@ gulp.task('less', function () {
   ]
   return gulp.src('src/sass/*.scss')
   .pipe(less())
+  .pipe(px2rem({
+    width_design: 750, // 设计稿宽度。默认值640
+    valid_num: 2, // 生成rem后的小数位数。默认值4
+    pieces: 10, // 将整屏切份。默认为10，相当于10rem = width_design(设计稿宽度)
+    ignore_px: [1,2], // 让部分px不在转换成rem。默认为空数组
+    ignore_selector: [] // 让部分选择器不在转换为rem。默认为空数组
+  }))
   .pipe(postcss(processors))
   .pipe(gulp.dest('dist/css'))
 })
@@ -121,10 +121,19 @@ const imagemin = require('gulp-imagemin');
  
 gulp.task('imagemin', function() {
   gulp.src('src/images/*')
-        .pipe(imagemin())
+        .pipe(imagemin({
+          optimizationLevel: 2,
+          progressive: true
+        }))
         .pipe(gulp.dest('dist/images'))
 });
 ```
+###### 图片压缩参数
+1. optimizationLevel: 5, //类型：Number  默认：3  取值范围：0-7（优化等级）
+2. progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
+3. interlaced: true, //类型：Boolean 默认：false 隔行扫描gif进行渲染
+4. multipass: true //类型：Boolean 默认：false 多次优化svg直到完全优化
+
 ## 运行gulp
 `gulp + 任务名`
 

@@ -33,7 +33,7 @@ gulp.task('less', function () {
     pieces: 10, // 将整屏切份。默认为10，相当于10rem = width_design(设计稿宽度)
     ignore_px: [1,2], // 让部分px不在转换成rem。默认为空数组
     ignore_selector: [] // 让部分选择器不在转换为rem。默认为空数组
-}))
+  }))
   .pipe(postcss(processors))
   .pipe(gulp.dest('dist/css'))
 })
@@ -57,9 +57,14 @@ gulp.task('html', function () {
   .pipe(gulp.dest('dist'))
 })
 // 重新载入js
-gulp.task('html', function () {
+gulp.task('js', function () {
   return gulp.src('src/js/*.js')
   .pipe(gulp.dest('dist/js'))
+})
+// 重新载入css:css文件夹下的css文件
+gulp.task('css', function () {
+  return gulp.src('src/css/*.css')
+  .pipe(gulp.dest('dist/css'))
 })
 
 gulp.task('watch', function () {
@@ -70,4 +75,4 @@ gulp.task('watch', function () {
 
 gulp.task('default', gulp.parallel('watch', 'connect'))
 
-gulp.task('build', gulp.series('less', 'cssmin', 'imagemin', 'html'))
+gulp.task('build', gulp.series('less', 'cssmin', 'imagemin', 'html','js','css'))
