@@ -38,14 +38,23 @@ gulp.task('default', function() {
 
 ## 常用插件
 > gulp-connect：页面自动更新
+
 > gulp-postcss: css解析器，将less文件解析成css
+
 > postcss-px-to-viewport: 移动端单位转换 px -> vw,vh
+
 > gulp-px2rem-plugin: 移动端单位转换 px -> rem
+
 > autoprefixer: 自动补全css前缀
+
 > gulp-clean-css: 压缩css文件，减小文件大小，并给引用url添加版本号避免缓存
+
 > gulp-less: less预编译
+
 > gulp-imagemin: 图片压缩
+
 > gulp-asset-rev: 自动添加版本号
+
 > gulp-concat: 合并javascript文件，减少网络请求
 
 ## 插件的配置
@@ -56,9 +65,13 @@ gulp.task('default', function() {
 ###### 配置
 参数：
 > host：地址：设为默认地址：0.0.0.0，PC端打开方式：http://localhost:3200/，移动端打开方式(同一局域网)：本地ip地址:3200
+
 > port： 端口号
+
 > root： 入口目录
+
 > livereload： 是否实时更新：默认false
+
 > 页面自动刷新：除了配置`livereload`为true外，需要在需要刷新的任务后面添加.pipe(connect.reload());
 ```javascript
 const gulp = require('gulp')
@@ -75,9 +88,12 @@ gulp.task('connect',function(){
 ```
 #### less文件转css，自动补全css前缀，px转rem：gulp-less，gulp-postcss，autoprefixer，gulp-px2rem-plugin
 ###### 安装
-`npm install gulp-less --save-dev`<br />
-`npm install gulp-postcss --save-dev`<br />
-`npm install autoprefixer --save-dev`<br />
+`npm install gulp-less --save-dev`
+
+`npm install gulp-postcss --save-dev`
+
+`npm install autoprefixer --save-dev`
+
 `npm install gulp-px2rem-plugin --save-dev`
 ###### 配置
 ```javascript
@@ -142,10 +158,13 @@ gulp.task('imagemin', function() {
 });
 ```
 ###### 图片压缩参数
-1. optimizationLevel: 5, //类型：Number  默认：3  取值范围：0-7（优化等级）
-2. progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
-3. interlaced: true, //类型：Boolean 默认：false 隔行扫描gif进行渲染
-4. multipass: true //类型：Boolean 默认：false 多次优化svg直到完全优化
+> optimizationLevel: 5, //类型：Number  默认：3  取值范围：0-7（优化等级）
+
+> progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
+
+> interlaced: true, //类型：Boolean 默认：false 隔行扫描gif进行渲染
+
+> multipass: true //类型：Boolean 默认：false 多次优化svg直到完全优化
 
 #### gulp-asset-rev：自动添加版本号
 ###### 安装
