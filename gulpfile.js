@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 const connect = require('gulp-connect');
-const px2rem = require('gulp-px2rem-plugin');
+const px2viewport = require('postcss-px-to-viewport')
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const less = require('gulp-less');
@@ -19,6 +19,11 @@ gulp.task('connect',function(){
 // 变异less文件：PC端去掉px2rem配置
 gulp.task('less', function () {
   var processors = [
+    px2viewport({
+      viewportWidth: 750, // 设计稿宽度
+      viewportUnit: 'vw', // 转换后单位
+      minPixelValue: 2 // 设置要替换的最小像素值
+    }),
     autoprefixer({ // 自动补全
       overrideBrowserslist: [
         "iOS >= 8",
@@ -29,13 +34,6 @@ gulp.task('less', function () {
   ]
   return gulp.src('src/less/*.less')
   .pipe(less())
-  .pipe(px2rem({
-    width_design: 750, // 设计稿宽度。默认值640
-    valid_num: 2, // 生成rem后的小数位数。默认值4
-    pieces: 10, // 将整屏切份。默认为10，相当于10rem = width_design(设计稿宽度)
-    ignore_px: [1,2], // 让部分px不在转换成rem。默认为空数组
-    ignore_selector: [] // 让部分选择器不在转换为rem。默认为空数组
-  }))
   .pipe(assetRev())
   .pipe(postcss(processors))
   .pipe(cssmin())
@@ -69,7 +67,7 @@ gulp.task('html', function () {
 })
 // 重新载入js
 gulp.task('js', function () {
-  return gulp.src('src/js/*.js')
+  return gulp.src('src/js/**/*.js')
   .pipe(gulp.dest('dist/js'))
   .pipe(connect.reload());
 })

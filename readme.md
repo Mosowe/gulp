@@ -41,9 +41,9 @@ gulp.task('default', function() {
 
 > gulp-postcss: css解析器，将less文件解析成css
 
-> postcss-px-to-viewport: 移动端单位转换 px -> vw,vh
+> postcss-px-to-viewport: 移动端单位转换 px -> vw,vh：推荐
 
-> gulp-px2rem-plugin: 移动端单位转换 px -> rem
+> gulp-px2rem-plugin: 移动端单位转换 px -> rem; 需要配置js来动态设置 html 的 font-size 值，不推荐
 
 > autoprefixer: 自动补全css前缀
 
@@ -86,7 +86,7 @@ gulp.task('connect',function(){
   })
 })
 ```
-#### less文件转css，自动补全css前缀，px转rem：gulp-less，gulp-postcss，autoprefixer，gulp-px2rem-plugin
+#### less文件转css，自动补全css前缀，px转rem：gulp-less，gulp-postcss，autoprefixer，postcss-px-to-viewport
 ###### 安装
 `npm install gulp-less --save-dev`
 
@@ -94,17 +94,22 @@ gulp.task('connect',function(){
 
 `npm install autoprefixer --save-dev`
 
-`npm install gulp-px2rem-plugin --save-dev`
+`npm install postcss-px-to-viewport --save-dev`
 ###### 配置
 ```javascript
 const gulp = require('gulp')
 const postcss = require('gulp-postcss')
-const px2rem = require('gulp-px2rem-plugin')
+const px2viewport = require('postcss-px-to-viewport')
 const autoprefixer = require('autoprefixer')
 const less = require('gulp-less')
 
 gulp.task('less', function () {
   var processors = [
+    px2viewport({
+      viewportWidth: 750, // 设计稿宽度
+      viewportUnit: 'vw', // 转换后单位
+      minPixelValue: 2 // 设置要替换的最小像素值
+    }),
     autoprefixer({ // 自动补全
       browsers: [
         "iOS >= 8",
@@ -115,13 +120,6 @@ gulp.task('less', function () {
   ]
   return gulp.src('src/sass/*.scss')
   .pipe(less())
-  .pipe(px2rem({
-    width_design: 750, // 设计稿宽度。默认值640
-    valid_num: 2, // 生成rem后的小数位数。默认值4
-    pieces: 10, // 将整屏切份。默认为10，相当于10rem = width_design(设计稿宽度)
-    ignore_px: [1,2], // 让部分px不在转换成rem。默认为空数组
-    ignore_selector: [] // 让部分选择器不在转换为rem。默认为空数组
-  }))
   .pipe(postcss(processors))
   .pipe(gulp.dest('dist/css'))
 })
