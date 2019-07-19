@@ -1,18 +1,4 @@
-/*
-* 测试
-* 马世伟
-*/
-.text {
-  font-size: 8vw;
-  background: #ff0000;
-}
-.text {
-  text-align: center;
-  font-size: 8vw;
-  background: #ff0000;
-  border: 0.53333vw solid #000;
-}
-.text p {
-  color: #fff;
-  text-align: center;
+/*001*/
+.index {
+  font: none;
 }

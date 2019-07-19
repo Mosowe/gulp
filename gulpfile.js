@@ -36,7 +36,7 @@ gulp.task('less', function () {
   .pipe(less())
   .pipe(assetRev())
   .pipe(postcss(processors))
-  .pipe(cssmin())
+  // .pipe(cssmin())
   .pipe(gulp.dest('dist/css'))
   .pipe(connect.reload());
 })
@@ -49,7 +49,9 @@ gulp.task('cssmove', function () {
       .pipe(connect.reload());
 });
 
-// 压缩转移图片
+/* 
+ *压缩转移图片 
+ */
 gulp.task('imagemin', function() {
   return gulp.src('src/images/**/*')
         .pipe(imagemin({
