@@ -14,43 +14,33 @@
     <meta name="description" content="your description">
     <meta name="author" content="author,email address">
 
-    <title>数据中心</title>
+    <title>拉新活动</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
+  <img src="./images/static/1.png" class="img"/>
 
-  <img src="./images/static/1.png">
+  <script src="./js/libs/jquery-3.3.1.min.js" ></script>
+  <script src="./js/index.js" ></script>
+  <script src="./js/ajax.js" ></script>
   <script>
-    // for (var i = 0; i < 5; i++) {
-    //   setTimeout((index) => {
-    //     console.log(index)
-    //   }, 1000, i)
-    // }
-    // for (var i = 0; i < 5; i++) {
-    //   setTimeout(((index) => {
-    //     return () => {
-    //       console.log(index)
-    //     }
-    //   })(i), 1000)
-    // }
-
-setTimeout(function () {
-	console.log(1)
-})
-console.log(2)
-new Promise(function (resolve) {
-	console.log(3)
-	resolve()
-}).then(function () {
-	console.log(4)
-})
-console.log(5)
-setTimeout(function () {
-	console.log(6)
-})
-
-
+    console.log('001')
+    let params = {
+        url:'https://test.edianyao.com/micro/ydyimh5/qywhelpinfo/lists',
+        method:'post',
+        headers:{
+          "Content-type":"application/json;charset=UTF-8",
+          "Authorization":"Basic aHc6aHc=",
+          "ydyversion":"3.2.0"
+        }
+      }
+    myAjax(params).then(res => {
+        console.log(res)
+      }).catch(res=>{
+        console.log(res)
+      })
+    console.log('002')
   </script>
 </body>

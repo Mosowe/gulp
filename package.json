@@ -1,7 +1,7 @@
 {
-  "name": "gulp",
+  "name": "mosowe-gulp",
   "version": "1.0.0",
-  "description": "gulp test",
+  "description": "gulp templet",
   "main": "gulpfile.js",
   "dependencies": {},
   "devDependencies": {
