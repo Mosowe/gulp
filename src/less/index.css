@@ -1,4 +1,11 @@
-img {
-  display: block;
-  margin: 100px auto;
+.btn {
+  width: 700px;
+  margin: 0 auto;
+  height: 60px;
+  line-height: 60px;
+  margin-top: 30px;
+  text-align: center;
+  font-size: 30px;
+  color: #666;
+  background-color: skyblue;
 }

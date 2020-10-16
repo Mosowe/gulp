@@ -20,27 +20,64 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-  <img src="./images/static/1.png" class="img"/>
+  <input type="file" id="file"/>
+  <div id="send" class="btn">上传</div>
+  <div id="get" class="btn">get</div>
+  <div id="post" class="btn">post</div>
 
-  <script src="./js/libs/jquery-3.3.1.min.js" ></script>
-  <script src="./js/index.js" ></script>
+
   <script src="./js/ajax.js" ></script>
   <script>
-    console.log('001')
-    let params = {
-        url:'https://test.edianyao.com/micro/ydyimh5/qywhelpinfo/lists',
-        method:'post',
-        headers:{
-          "Content-type":"application/json;charset=UTF-8",
-          "Authorization":"Basic aHc6aHc=",
-          "ydyversion":"3.2.0"
+    document.getElementById('send').onclick  =() =>  {
+      let data  = document.getElementById('file').files[0]
+      let file = new FormData()
+      file.append('file', data);
+      let params = {
+          url:'https://test.edianyao.com/micro/ydycommonh5/file/uploadImage',
+          method:'post',
+          file:file,
+          headers:{
+            "Authorization":"bearer ebd103ec-a8ab-44a8-9c2b-d91d09fcdc4f",
+            "ydyversion":"3.2.0"
+          }
         }
-      }
-    myAjax(params).then(res => {
-        console.log(res)
-      }).catch(res=>{
-        console.log(res)
-      })
-    console.log('002')
+      myAjax(params).then(res => {
+          console.log(res)
+        }).catch(res=>{
+          console.log(res)
+        })      
+    }
+    document.getElementById('get').onclick  =() =>  {
+      let params = {
+          url:'https://test.edianyao.com/micro/ydyuserh5/qywusers/getInfo/13277082678',
+          method:'get',
+          data: {
+            platform:'h5'
+          },
+          headers:{
+            "Authorization":"bearer ebd103ec-a8ab-44a8-9c2b-d91d09fcdc4f",
+            "ydyversion":"3.2.0"
+          }
+        }
+      myAjax(params).then(res => {
+          console.log(res)
+        }).catch(res=>{
+          console.log(res)
+        })      
+    }
+    document.getElementById('post').onclick  =() =>  {
+      let params = {
+          url:'https://test.edianyao.com/micro/ydyimh5/qywhelpinfo/lists',
+          method:'post',
+          data: {
+            platform: 'h5'
+          }
+        }
+      myAjax(params).then(res => {
+          console.log(res)
+        }).catch(res=>{
+          console.log(res)
+        })      
+    }
   </script>
 </body>
