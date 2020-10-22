@@ -10,7 +10,7 @@ const assetRev = require('gulp-asset-rev');
 
 gulp.task('connect',function(){
   connect.server({
-    host: '0.0.0.0',
+    host: '192.168.74.115',
     port: 3200, // 端口
     root: 'dist', // 入口目录名
     livereload: true // 是否自动更新
