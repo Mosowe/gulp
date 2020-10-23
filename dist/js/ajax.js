@@ -1,4 +1,9 @@
-function myAjax (params) {
+/**********************/
+/****ajax原生请求******/
+/****20201020**********/
+/****马世伟************/
+/**********************/
+function myAjax (params) { 
   return new Promise((resolve, reject) => {
     if (!params.url) {
       console.log('url不能为空')
@@ -9,7 +14,7 @@ function myAjax (params) {
     }else{
       request=new ActiveXObject("Microsoft.XMLHTTP");
     }
-    // get请求，拼接参数在url后面 
+    // get请求，拼接参数在url后面
     if (params.method && params.method.toLowerCase() === 'get' || !params.method) {
       let data = ''
       for (const key in params.data) {
@@ -32,9 +37,9 @@ function myAjax (params) {
     for (const key in params.headers) {
       request.setRequestHeader(key,params.headers[key]);
       if (key.toLowerCase() === 'content-type') {
-        hasContentType = true
+        hasContentType = true 
       }
-    }
+    } 
     // get请求
     if (params.method && params.method.toLowerCase() === 'get' || !params.method) {
       hasContentType ? '': request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

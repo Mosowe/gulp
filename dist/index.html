@@ -3,81 +3,284 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
-    <!-- 移动端：自适应屏幕尺寸及禁止用户缩放 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <!-- iphone X底部适配及浏览器禁止放大 -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover" name="viewport"/>
     <!-- 移动端：禁止自动识别页面中有可能是电话格式的数字 -->
     <meta name="format-detection" content="telephone=no">
     <!-- PC：渲染模式,以下代码IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame. -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
     <!-- PC：seo -->
-    <meta name="keywords" content="your keywords">
+    <!-- <meta name="keywords" content="your keywords">
     <meta name="description" content="your description">
-    <meta name="author" content="author,email address">
+    <meta name="author" content="author,email address"> -->
 
     <title>拉新活动</title>
     <link rel="stylesheet" href="css/reset.css?v=c0ad8f6">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/dialog.css">
+    <script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1279370638'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279370638' type='text/javascript'%3E%3C/script%3E"));</script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" ></script>
+    <script src="./js/libs/vconsole.min.js?v=9b0e8fe" ></script>
+    <script src="./js/env.js?v=c970483" ></script>
+    <script src="./js/unescape.js?v=64dac36" ></script>
 </head>
 <body>
-  <input type="file" id="file"/>
-  <div id="send" class="btn">上传</div>
-  <div id="get" class="btn">get</div> 
-  <div id="post" class="btn">post</div>
+  <!-- loading -->
+  <div class="loading" id="loading">
+    <img src="./images/loading.gif?v=53f541d" />
+  </div>
+
+  <div class="body-content" id="bodyContent">
+  <!--  -->
+  <!--  -->
+  <!-- 主内容区 -->
+    <div class="index" id="index">
+      <!-- 顶部区 -->
+      <div class="top-content">
+        <div class="rule-icon" onclick="clickOpen('rule')">规则</div>
+        <div class="swiper" id="swiper">
+          <div class="lists">
+            <div class="item">
+              <div class="avatar">
+                <img src="./images/202010active/index-top-bg.png?v=0e17a26">
+              </div>
+              <div class="text">11111黑眼圈刚刚已拆的3元现金红包黑眼圈刚刚已拆的3元现金红包</div>
+            </div>
+            <div class="item">
+              <div class="avatar">
+                <img src="./images/202010active/index-top-bg.png?v=0e17a26">
+              </div>
+              <div class="text">2222黑眼圈刚刚已拆的3元现金红包黑眼圈刚刚已拆的3元现金红包</div>
+            </div>
+            <div class="item">
+              <div class="avatar">
+                <img src="./images/202010active/index-top-bg.png?v=0e17a26">
+              </div>
+              <div class="text">3333黑眼圈刚刚已拆的3元现金红包黑眼圈刚刚已拆的3元现金红包</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 红包区 -->
+      <div class="red-content-wrap">
+      <div class="red-content" id="redContent">
+        <div class="list">
+          <!-- <div class="item">
+            <div class="icon-red"></div>
+            <div class="red-wrap opened">
+              <div class="text">恭喜您获得</div>
+              <div class="price"><span>¥</span>0.15</div>
+              <div class="notice">现金已存入<br>我的钱包</div>
+            </div>
+          </div>        
+          <div class="item">
+            <div class="icon-red"></div>
+            <div class="red-wrap wait" onclick="clickOpen('red',1)">
+              <div class="text">拆最高2元</div>
+              <div class="limit">邀请3人可拆</div>
+            </div>
+          </div>        
+          <div class="item">
+            <div class="icon-red"></div>
+            <div class="red-wrap lockup">
+              <div class="text">拆最高2元</div>
+              <div class="limit">邀请3人可拆</div>
+            </div>
+          </div> 
+          <div class="progress-content" id="progressContent">
+            <div class="active"></div>
+            <div class="light-text" id="redLightText">
+              <div class="text">已邀请4人</div>
+            </div>
+          </div> -->
+        </div>
+
+      </div>
+      </div>
+      <!-- 按钮提示区 -->
+      <div class="time-btn-content">
+        <div class="time" id="countDown">
+          <!-- 距离本期红包失效还有7天
+          <span class="text">18</span>
+          <span class="dot">:</span>
+          <span class="text">18</span>
+          <span class="dot">:</span>
+          <span class="text">54</span> -->
+        </div>
+        <div class="notice" id="countDownNotice">本期红包已失效，请重新发起</div>
+        <div class="notice" id="countDownNotice2">助力好友，你也有机会领现金红包哦~</div>
+        <div class="btn" id="countDownBtn">
+          <div class="btn-wrap">
+            <div class="image-get image" onclick="requestActive()"></div>
+            <div class="image-help image" onclick="toFriend()"></div>
+            <div class="image-start image" onclick="beginActive()"></div>
+          </div>
+        </div>
+      </div>
+      <!-- 钱包区 -->
+      <div class="my-price-content">
+        <div class="page-title">
+          <img src="./images/202010active/title-left.png?v=9515e8d" />
+          我的钱包
+          <img src="./images/202010active/title-right.png?v=e9c94a2" />
+        </div>
+        <div class="content">
+          <div class="price">
+            <span class="text">待提现</span>
+            <span class="icon">¥</span>
+            <span class="num">96.3</span>
+          </div>
+          <div class="notice">活动累计收益158元></div>
+          <div class="btn">立即提现</div>
+        </div>
+      </div>
+      <!-- 邀请记录区 -->
+      <div class="request-list-content">
+        <div class="page-title">
+          <img src="./images/202010active/title-left.png?v=9515e8d" />
+          邀请记录
+          <img src="./images/202010active/title-right.png?v=e9c94a2" />
+        </div>
+        <div class="total">成功邀请9人</div>
+        <div class="empty">暂无邀请记录</div>
+        <div class="list-content" id="requestList">
+          <div class="item">
+            <div class="avatar">
+              <img src="./images/202010active/index-top-bg.png?v=0e17a26" />
+            </div>
+            <div class="info">
+              <div class="nickname">徐驰</div>
+              <div class="time">今天 09:23</div>
+            </div>
+            <div class="mobile">159****1265</div>
+          </div>
+          <div class="item">
+            <div class="avatar">
+              <img src="./images/202010active/index-top-bg.png?v=0e17a26" />
+            </div>
+            <div class="info">
+              <div class="nickname">徐驰</div>
+              <div class="time">今天 09:23</div>
+            </div>
+            <div class="mobile">159****1265</div>
+          </div>
+        </div>
+        <div class="notice">
+          <div id="notice-up">上拉加载更多</div>
+          <div id="notice-loading">加载中...</div>
+          <div id="notice-end">数据已加载完</div>
+        </div>
+      </div>
+    </div>
+    <!-- 下拉提示（未用） -->
+    <div class="refresh" id="refresh">
+      <div id="refresh-down">下拉刷新</div>
+      <div id="refresh-now">松手刷新</div>
+      <div id="refresh-loading">刷新中...</div>
+      <div id="refresh-end">已刷新</div>
+    </div>
+
+  </div>
+    <!-- 模拟注册的 -->
+    <!-- <div class="register" onclick="register()">注册</div> -->
 
 
-  <script src="./js/ajax.js?v=f1576cc" ></script>
-  <script>
-    document.getElementById('send').onclick  =() =>  {
-      let data  = document.getElementById('file').files[0]
-      let file = new FormData()
-      file.append('file', data);
-      let params = {
-          url:'https://test.edianyao.com/micro/ydycommonh5/file/uploadImage',
-          method:'post',
-          file:file,
-          headers:{
-            "Authorization":"bearer ebd103ec-a8ab-44a8-9c2b-d91d09fcdc4f",
-            "ydyversion":"3.2.0"
-          }
-        }
-      myAjax(params).then(res => {
-          console.log(res)
-        }).catch(res=>{
-          console.log(res)
-        })      
-    }
-    document.getElementById('get').onclick  =() =>  {
-      let params = {
-          url:'https://test.edianyao.com/micro/ydyuserh5/qywusers/getInfo/13277082678',
-          method:'get',
-          data: {
-            platform:'h5'
-          },
-          headers:{
-            "Authorization":"bearer ebd103ec-a8ab-44a8-9c2b-d91d09fcdc4f",
-            "ydyversion":"3.2.0"
-          }
-        }
-      myAjax(params).then(res => {
-          console.log(res)
-        }).catch(res=>{
-          console.log(res)
-        })      
-    }
-    document.getElementById('post').onclick  =() =>  {
-      let params = {
-          url:'https://test.edianyao.com/micro/ydyimh5/qywhelpinfo/lists',
-          method:'post',
-          data: {
-            platform: 'h5'
-          }
-        }
-      myAjax(params).then(res => {
-          console.log(res)
-        }).catch(res=>{
-          console.log(res)
-        })      
-    }
-  </script>
+  <!--  -->
+  <!--  -->
+  <!--  -->
+  <!-- 弹框区 -->
+  <!-- 规则弹框区 -->
+  <div class="active-dialog" id="ruleDialog">
+    <div class="active-dialog-wrapper">
+      <div class="rule-content">
+        <div class="dialog-title">活动规则</div>
+        <div class="dialog-text">
+          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
+          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
+          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
+          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
+          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
+          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
+          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
+        </div>
+      </div>
+
+      <!-- 关闭按钮 -->
+      <div class="close" id="ruleClose" onclick="closeDialog('rule')">
+        <img src="./images/close.png?v=8af8ca0" />
+      </div>
+    </div>
+  </div>
+  <!-- 红包弹框区 -->
+  <div class="active-dialog" id="activeDialog">
+    <div class="active-dialog-wrapper" id="activeDialogWrapper">
+      <div class='index-dialog-conponent'>
+        <!-- 2020-10期，拉新红包 --> 
+        <div class="new-red-packet-dialog_202010">
+          <div class="bg-top" id="bg-top"></div>
+          <div class="bg-bottom" id="bg-bottom"></div>
+          <div class="btn-open" id="btnOpen" onclick="btnOpen()"></div>
+          <div class="result-content" id="result-content">
+            <div class="content">
+              <div class="text">恭喜您获得</div>
+              <div class="price">
+                <span>￥</span>0.3
+              </div>
+              <div class="notice">红包已存入“个人中心-我的钱包”</div>
+              <div class="more-btns">开心收下</div>
+              <div class="get-now" onclick="gotoWallet()">立即提现></div>
+            </div>
+          </div>
+        </div>
+      </div>   
+      <!-- 关闭按钮 -->
+      <div class="close" id="close" onclick="closeDialog('red')" style="display: none;">
+        <img src="./images/close.png?v=8af8ca0" />
+      </div>      
+    </div>
+  </div>
+  <!-- 注册红包弹框区 -->
+  <div class="active-dialog" id="registerDialog">
+    <div class="active-dialog-wrapper">
+      <div class="new-red-packet-dialog_202010">
+        <div class="bg-top" id="bgTopR"></div>
+        <div class="bg-bottom" id="bgBottomR">
+          <div class="text">已有12578人领到红包</div>
+          <div class="notice">每天可领4个红包，最高领30元</div>
+        </div>
+        <div class="btn-open" id="btnOpenR" onclick="openRed202010()"></div>
+        <div class="result-content" id="resultContentR">
+          <div class="content">
+            <div class="text">恭喜您获得</div>
+            <div class="price">
+              <span>￥</span>0.3
+            </div>
+            <div class="notice">红包已存入“个人中心-我的钱包”</div>
+            <div class="more-btns">再开四个红包</div>
+            <div class="get-now" onclick="gotoWallet()">立即提现></div>
+          </div>
+        </div>
+      </div>
+      <!-- 关闭按钮 -->
+      <div class="close" id="closeRegister" onclick="closeDialog('register')">
+        <img src="./images/close.png?v=8af8ca0" />
+      </div>      
+    </div>
+  </div>
+
+
+  <!-- 动态添加的样式 -->
+  <div id="style"></div>
+  <!--  -->
+  <!--  -->
+  <!--  -->
+  <!-- javascript代码区 -->
+  <script src="./js/base.js?v=3ced78f" ></script>
+  <script src="./js/plugins.js?v=842546f" ></script>
+  <script src="./js/ajax.js?v=59443f5" ></script>
+  <script src="./js/dialog.js?v=351d684" ></script>
+  <script src="./js/index.js?v=88cfda4" ></script>
+  <script src="./js/api.js?v=d452ed9" ></script>
+  <script src="./js/wx.config.js?v=2b24a33" ></script>
 </body>

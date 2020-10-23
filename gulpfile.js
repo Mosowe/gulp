@@ -8,6 +8,19 @@ const cssmin = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
 const assetRev = require('gulp-asset-rev');
 
+var fs = require('fs');
+
+var env = 'test'; // 用于执行gulp任务时的判断
+function set_env(type){
+    env = type || 'dev';
+    // 生成env.js文件，用于开发页面时，判断环境
+    
+    fs.writeFile("./src/js/env.js", 'function ENV (){ return "' + env + '"};', function(err){
+        err && console.log(err);
+    });
+}
+
+
 gulp.task('connect',function(){
   connect.server({
     host: '192.168.74.115',
@@ -15,6 +28,9 @@ gulp.task('connect',function(){
     root: 'dist', // 入口目录名
     livereload: true // 是否自动更新
   })
+  setTimeout(()=>{
+    set_env(process.env.NODE_ENV)
+  },500)
 })
 // 变异less文件：PC端去掉px2rem配置
 gulp.task('less', function () {
@@ -82,6 +98,6 @@ gulp.task('watch', function () {
   gulp.watch('src/images/**/*', gulp.series('imagemin'))
 })
 
-gulp.task('default', gulp.parallel('watch', 'connect'))
-
 gulp.task('build', gulp.series('less', 'cssmove', 'imagemin', 'html','js'))
+gulp.task('default', gulp.parallel('watch', 'connect','build'))
+

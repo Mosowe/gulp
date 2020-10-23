@@ -3,7 +3,7 @@
 /****20201020**********/
 /****马世伟************/
 /**********************/
-function myAjax (params) {
+function myAjax (params) { 
   return new Promise((resolve, reject) => {
     if (!params.url) {
       console.log('url不能为空')
@@ -37,9 +37,9 @@ function myAjax (params) {
     for (const key in params.headers) {
       request.setRequestHeader(key,params.headers[key]);
       if (key.toLowerCase() === 'content-type') {
-        hasContentType = true
+        hasContentType = true 
       }
-    }
+    } 
     // get请求
     if (params.method && params.method.toLowerCase() === 'get' || !params.method) {
       hasContentType ? '': request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

@@ -175,8 +175,7 @@ function timeDown () {
 }
 
 
-czc_pageShow(base().isIos ? 'Ios' : 'Android')
-czc_pageShowPlat(base().hasOwnProperty('platform') ? base().platform : 'H5')
+czc_pageShowPlat(base().hasOwnProperty('platform') ? base().platform : 'H5', base().isIos ? 'Ios' : 'Android')
 // 邀好友赚现金点击
 function requestActive () {
   czc_clickRequestFriend()
