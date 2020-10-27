@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/dialog.css">
     <script type="text/javascript">document.write(unescape("%3Cspan id='cnzz_stat_icon_1279370638'%3E%3C/span%3E%3Cscript src='https://v1.cnzz.com/z_stat.php%3Fid%3D1279370638' type='text/javascript'%3E%3C/script%3E"));</script>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js" ></script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=76f4f13469b0ca80578376ee5735885d"></script> 
     <script src="./js/libs/vconsole.min.js" ></script>
     <script src="./js/env.js" ></script>
     <script src="./js/unescape.js" ></script>
@@ -40,66 +41,17 @@
       <div class="top-content">
         <div class="rule-icon" onclick="clickOpen('rule')">规则</div>
         <div class="swiper" id="swiper">
-          <div class="lists">
-            <div class="item">
-              <div class="avatar">
-                <img src="./images/202010active/index-top-bg.png">
-              </div>
-              <div class="text">11111黑眼圈刚刚已拆的3元现金红包黑眼圈刚刚已拆的3元现金红包</div>
-            </div>
-            <div class="item">
-              <div class="avatar">
-                <img src="./images/202010active/index-top-bg.png">
-              </div>
-              <div class="text">2222黑眼圈刚刚已拆的3元现金红包黑眼圈刚刚已拆的3元现金红包</div>
-            </div>
-            <div class="item">
-              <div class="avatar">
-                <img src="./images/202010active/index-top-bg.png">
-              </div>
-              <div class="text">3333黑眼圈刚刚已拆的3元现金红包黑眼圈刚刚已拆的3元现金红包</div>
-            </div>
-          </div>
+          <div class="lists"></div>
         </div>
       </div>
       <!-- 红包区 -->
       <div class="red-content-wrap">
-      <div class="red-content" id="redContent">
-        <div class="list">
-          <!-- <div class="item">
-            <div class="icon-red"></div>
-            <div class="red-wrap opened">
-              <div class="text">恭喜您获得</div>
-              <div class="price"><span>¥</span>0.15</div>
-              <div class="notice">现金已存入<br>我的钱包</div>
-            </div>
-          </div>        
-          <div class="item">
-            <div class="icon-red"></div>
-            <div class="red-wrap wait" onclick="clickOpen('red',1)">
-              <div class="text">拆最高2元</div>
-              <div class="limit">邀请3人可拆</div>
-            </div>
-          </div>        
-          <div class="item">
-            <div class="icon-red"></div>
-            <div class="red-wrap lockup">
-              <div class="text">拆最高2元</div>
-              <div class="limit">邀请3人可拆</div>
-            </div>
-          </div> 
-          <div class="progress-content" id="progressContent">
-            <div class="active"></div>
-            <div class="light-text" id="redLightText">
-              <div class="text">已邀请4人</div>
-            </div>
-          </div> -->
+        <div class="red-content" id="redContent">
+          <div class="list"></div>
         </div>
-
-      </div>
       </div>
       <!-- 按钮提示区 -->
-      <div class="time-btn-content">
+      <div class="time-btn-content" id="time-btn-content">
         <div class="time" id="countDown">
           <!-- 距离本期红包失效还有7天
           <span class="text">18</span>
@@ -108,13 +60,15 @@
           <span class="dot">:</span>
           <span class="text">54</span> -->
         </div>
-        <div class="notice" id="countDownNotice">本期红包已失效，请重新发起</div>
-        <div class="notice" id="countDownNotice2">助力好友，你也有机会领现金红包哦~</div>
+        <div class="notice" id="countDownNotice"></div>
         <div class="btn" id="countDownBtn">
           <div class="btn-wrap">
+            <!-- 邀好友：没登录显示 -->
             <div class="image-get image" onclick="requestActive()"></div>
-            <div class="image-help image" onclick="toFriend()"></div>
+            <!-- 立即发起：登录显示，助力成功或失败后 -->
             <div class="image-start image" onclick="beginActive()"></div>
+            <!-- 帮他助力：来自别人的助力邀请显示，与登录无关 -->
+            <div class="image-help image" onclick="toFriend()"></div>
           </div>
         </div>
       </div>
@@ -125,15 +79,7 @@
           我的钱包
           <img src="./images/202010active/title-right.png" />
         </div>
-        <div class="content">
-          <div class="price">
-            <span class="text">待提现</span>
-            <span class="icon">¥</span>
-            <span class="num">96.3</span>
-          </div>
-          <div class="notice">活动累计收益158元></div>
-          <div class="btn">立即提现</div>
-        </div>
+        <div class="content" id="myPrice"></div>
       </div>
       <!-- 邀请记录区 -->
       <div class="request-list-content">
@@ -142,31 +88,10 @@
           邀请记录
           <img src="./images/202010active/title-right.png" />
         </div>
-        <div class="total">成功邀请9人</div>
-        <div class="empty">暂无邀请记录</div>
-        <div class="list-content" id="requestList">
-          <div class="item">
-            <div class="avatar">
-              <img src="./images/202010active/index-top-bg.png" />
-            </div>
-            <div class="info">
-              <div class="nickname">徐驰</div>
-              <div class="time">今天 09:23</div>
-            </div>
-            <div class="mobile">159****1265</div>
-          </div>
-          <div class="item">
-            <div class="avatar">
-              <img src="./images/202010active/index-top-bg.png" />
-            </div>
-            <div class="info">
-              <div class="nickname">徐驰</div>
-              <div class="time">今天 09:23</div>
-            </div>
-            <div class="mobile">159****1265</div>
-          </div>
-        </div>
-        <div class="notice">
+        <div class="total" id="requestListNum">成功邀请9人</div>
+        <div class="empty" id="requestListEmpty">暂无邀请记录</div>
+        <div class="list-content" id="requestList"></div>
+        <div class="notice" id="upNotice">
           <div id="notice-up">上拉加载更多</div>
           <div id="notice-loading">加载中...</div>
           <div id="notice-end">数据已加载完</div>
@@ -182,8 +107,6 @@
     </div>
 
   </div>
-    <!-- 模拟注册的 -->
-    <!-- <div class="register" onclick="register()">注册</div> -->
 
 
   <!--  -->
@@ -195,15 +118,7 @@
     <div class="active-dialog-wrapper">
       <div class="rule-content">
         <div class="dialog-title">活动规则</div>
-        <div class="dialog-text">
-          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
-          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
-          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
-          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
-          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
-          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
-          1.活动规则根据文案来定，这个只是样式展示，具体内容按产品给我文档为主 2.活动时间：2019.12.01-2019.12.3
-        </div>
+        <div class="dialog-text" id="ruleText"></div>
       </div>
 
       <!-- 关闭按钮 -->
@@ -212,7 +127,7 @@
       </div>
     </div>
   </div>
-  <!-- 红包弹框区 -->
+  <!-- 开拉新红包弹框区 -->
   <div class="active-dialog" id="activeDialog">
     <div class="active-dialog-wrapper" id="activeDialogWrapper">
       <div class='index-dialog-conponent'>
@@ -222,15 +137,15 @@
           <div class="bg-bottom" id="bg-bottom"></div>
           <div class="btn-open" id="btnOpen" onclick="btnOpen()"></div>
           <div class="result-content" id="result-content">
-            <div class="content">
+            <!-- <div class="content">
               <div class="text">恭喜您获得</div>
               <div class="price">
                 <span>￥</span>0.3
               </div>
               <div class="notice">红包已存入“个人中心-我的钱包”</div>
-              <div class="more-btns">开心收下</div>
+              <div class="more-btns" onclick="closeDialog('red')">开心收下</div>
               <div class="get-now" onclick="gotoWallet()">立即提现></div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>   
@@ -245,13 +160,10 @@
     <div class="active-dialog-wrapper">
       <div class="new-red-packet-dialog_202010">
         <div class="bg-top" id="bgTopR"></div>
-        <div class="bg-bottom" id="bgBottomR">
-          <div class="text">已有12578人领到红包</div>
-          <div class="notice">每天可领4个红包，最高领30元</div>
-        </div>
+        <div class="bg-bottom" id="bgBottomR"></div>
         <div class="btn-open" id="btnOpenR" onclick="openRed202010()"></div>
         <div class="result-content" id="resultContentR">
-          <div class="content">
+          <!-- <div class="content">
             <div class="text">恭喜您获得</div>
             <div class="price">
               <span>￥</span>0.3
@@ -259,7 +171,7 @@
             <div class="notice">红包已存入“个人中心-我的钱包”</div>
             <div class="more-btns">再开四个红包</div>
             <div class="get-now" onclick="gotoWallet()">立即提现></div>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- 关闭按钮 -->
@@ -268,19 +180,81 @@
       </div>      
     </div>
   </div>
+  <!-- 登录 -->
+  <div class="active-dialog" id="loginDialog">
+    <div class="active-dialog-wrapper">
+      <div class="login-content">
+        <div class="title">登录注册易点药<br>就有机会领取现金红包</div>
+        <div class="input-item">
+          <input type="number"  oninput="if(value.length>11)value=value.slice(0,11)" id="userMobile" placeholder="请填写手机号注册"/>
+        </div>
+        <div class="input-item last">
+          <div class="code-input">
+            <input type="number"  oninput="if(value.length>6)value=value.slice(0,6)" id="userCode" placeholder="请输入验证码"/>
+          </div>
+          <div class="code-send" id="codeSend" onclick="sendCode()">获取验证码</div>
+        </div>
+        <div class="login-btn" onclick="login()">确定</div>
+        <div class="closeLogin" onclick="closeDialog('login')">
+          <img src="./images/closeLogin.png" />
+        </div>   
+      </div>
+    </div>
+  </div>
+  <!-- 发起活动：海报 -->
+  <div class="active-dialog" id="posterDialog">
+    <div class="active-dialog-wrapper">
+      <div class="poster-content">
+        <img src="" id="posterImg" class="poster-img"/>
+
+        <div class="h5-show" id="posterH5Show">
+          <div class="closeLogin" onclick="closeDialog('poster')">
+            <img src="./images/closeLogin.png" />
+          </div>
+          长按图片保存到相册
+        </div>
+<!-- 以下app原生实现 -->
+        <!-- <div class="share-list-wrap" id="shareList">
+          <div class="share-item-wrap">
+            <div class="item" onclick="shareWeChat()">
+              <img src="./images/share-wechat.png" class="icon"/>
+              微信好友
+            </div>
+            <div class="item" onclick="shareDownload()">
+              <img src="./images/share-download.png" class="icon"/>
+              下载海报
+            </div>
+            <div class="item" onclick="shareFriend()">
+              <img src="./images/share-friend.png" class="icon"/>
+              朋友圈
+            </div>
+            <div class="item" onclick="shareLink()">
+              <img src="./images/share-link.png" class="icon"/>
+              分享链接
+            </div>
+          </div>
+          <div class="cancel" onclick="closeDialog('poster')">取消</div>
+        </div>  -->
+      </div>
+    </div>
+  </div>
+
 
 
   <!-- 动态添加的样式 -->
   <div id="style"></div>
+  <div id="my-toast"></div>
   <!--  -->
   <!--  -->
   <!--  -->
   <!-- javascript代码区 -->
   <script src="./js/base.js" ></script>
+  <script src="./js/amap.js" ></script>
+  <script src="./js/apiNames.js" ></script>
   <script src="./js/plugins.js" ></script>
   <script src="./js/ajax.js" ></script>
   <script src="./js/dialog.js" ></script>
-  <script src="./js/index.js" ></script>
-  <script src="./js/api.js" ></script>
   <script src="./js/wx.config.js" ></script>
+  <script src="./js/api.js" ></script>
+  <script src="./js/index.js" ></script>
 </body>

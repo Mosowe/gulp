@@ -28,12 +28,10 @@ gulp.task('connect',function(){
     root: 'dist', // 入口目录名
     livereload: true // 是否自动更新
   })
-  setTimeout(()=>{
-    set_env(process.env.NODE_ENV)
-  },500)
 })
 // 变异less文件：PC端去掉px2rem配置
 gulp.task('less', function () {
+  set_env(process.env.NODE_ENV)
   var processors = [
     px2viewport({
       viewportWidth: 750, // 设计稿宽度
@@ -99,5 +97,5 @@ gulp.task('watch', function () {
 })
 
 gulp.task('build', gulp.series('less', 'cssmove', 'imagemin', 'html','js'))
-gulp.task('default', gulp.parallel('watch', 'connect','build'))
+gulp.task('default', gulp.parallel('watch', 'connect', 'build'))
 

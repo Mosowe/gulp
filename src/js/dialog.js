@@ -2,34 +2,15 @@
 /***********红包弹框区*********/
 /******************************/
 
-// 模拟注册
-function register () {
-  document.getElementById('registerDialog').classList.add('show-dialog')
+// 注册或登录
+function registerOrLogin () {
+  document.getElementById('loginDialog').classList.add('show-dialog')
 }
 // 点击注册红包弹框‘开’按钮
 function openRed202010 () {
-  let btnOpenR = document.getElementById('btnOpenR').classList
-  let bgTopR = document.getElementById('bgTopR').classList
-  let bgBottomR = document.getElementById('bgBottomR').classList
-  btnOpenR.add('opening')
-  let t = setTimeout(() => {
-    clearTimeout(t);
-    btnOpenR.remove('opening')
-    btnOpenR.add('opened')
-    bgTopR.add('opening')
-    bgBottomR.add('opening')
-    let t1 = setTimeout(() => {
-      clearTimeout(t1);
-      bgTopR.add('hidden')
-      bgBottomR.add('hidden')
-    }, 1000);
-    let t2 = setTimeout(() => {
-      clearTimeout(t2);
-      document.getElementById('resultContentR').classList.add('result-open')
-    }, 100);
-  }, 1000);
+  apiOpenedRegister()
 }
-
+ 
 
 let thisRed = '' // 点击的当前红包，数字1开始
 // 点击红包列表的待开红包
@@ -73,9 +54,13 @@ function closeDialog (type) {
     document.getElementById('ruleDialog').classList.remove('show-dialog')
   } else if (type === 'register') {
     document.getElementById('registerDialog').classList.remove('show-dialog')
+  } else if (type === 'login') {
+    document.getElementById('loginDialog').classList.remove('show-dialog')
+  } else if (type === 'poster') {
+    document.getElementById('posterDialog').classList.remove('show-dialog')
   }
 }
 // 去钱包+去提现
 function gotoWallet () {
-  console.log(0)
+  getPriceNow()
 }

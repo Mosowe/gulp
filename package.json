@@ -23,10 +23,10 @@
     "postcss-px-to-viewport": "^1.1.1"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production gulp",
+    "build": "cross-env NODE_ENV=production gulp build",
     "serve": "cross-env NODE_ENV=test gulp",
-    "test": "cross-env NODE_ENV=test gulp",
-    "trail": "cross-env NODE_ENV=trail gulp"
+    "test": "cross-env NODE_ENV=test gulp build",
+    "trail": "cross-env NODE_ENV=trail gulp build"
   },
   "author": "",
   "license": "ISC"

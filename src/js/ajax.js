@@ -58,6 +58,12 @@ function myAjax (params) {
 
     request.onreadystatechange = () => {
       if(request.readyState === 4){
+        let res = JSON.parse(request.responseText)
+        // console.log(res)
+        if (res.code === 555) { // 系统维护
+          location.href = res.data.url
+          return
+        }
         if(request.status === 200){
           resolve(JSON.parse(request.responseText));
         } else{

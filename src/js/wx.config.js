@@ -1,31 +1,18 @@
 /******************************/
 /**********微信配置区**********/
 /******************************/
-const baseInfo = base()
-const apiInfo = apis()
-const wxEmpowerUrl = baseInfo.type !=='production' ? 'https://t.edianyao.com/wechat/code' : 'https://www.edianyao.com/wechat/code' // 微信授权调用PHP中转页---E点药/易点药
-const shareUrl = location.href.split('?')[0] // 分享链接
-const iosHref = location.href // 分享链接ios
-const shareData = {
-  title: '202010拉新的活动',
-  desc: '邀好友，赚现金',
-  link: shareUrl,
-  shareImage: baseInfo.type !=='production' ? 'https://h5t.edianyao.com/active202010Test/images/202010active/index-top-bg.png' : 'https://h5t.edianyao.com/active202010/images/202010active/index-top-bg.png' //分享图片
-}
-
-// 获取授权
-// function wxEmpower () {
-//   if (location.href.indexOf('localhost') > -1 || location.href.indexOf('192.168.74.115') > -1) { // 测试环境不授权
-//     return false;
-//   } else {
-//     // window.location.href = `https://www.edianyao.com/wechat/code?redirect=${url}/login`; // 生产环境的
-//     redirect = encodeURIComponent(`${url}/login?${redirect}`);
-//     window.location.href = `${wxUrl.wxEmpowerUrl}?redirect=${redirect}`; // 测试环境的
-//   }
-// }
+// const wxEmpowerUrl = baseInfo.type !=='production' ? 'https://t.edianyao.com/wechat/code' : 'https://www.edianyao.com/wechat/code' // 微信授权调用PHP中转页---E点药/易点药
 
 // 配置微信jssdk
 function configWxJssdk  (href) {
+  const shareUrl = location.href.split('?')[0] // 分享链接
+  const iosHref = location.href // 分享链接ios
+  const shareData = {
+    title: '202010拉新的活动',
+    desc: '邀好友，赚现金',
+    link: shareUrl + `?aid=${baseInfo.aid}&pid=${baseInfo.userId || 0}`,
+    shareImage: baseInfo.type !=='production' ? 'https://h5t.edianyao.com/active202010Test/images/202010active/index-top-bg.png' : 'https://h5t.edianyao.com/active202010/images/202010active/index-top-bg.png' //分享图片
+  }
   if (!baseInfo.isWxBrowser) {
     return;
   }
@@ -33,7 +20,7 @@ function configWxJssdk  (href) {
     href = iosHref;
   }
   let params = {
-      url: baseInfo.apiUrl + apiInfo.wxJssdkConfig,
+      url: baseInfo.apiUrl + apis.wxJssdkConfig,
       method:'get',
       data: {
         url:href
@@ -97,7 +84,6 @@ function configWxJssdk  (href) {
     console.log('获取微信配置参数失败');
   })
 };
-configWxJssdk(shareUrl)
 
 // 微信分享配置
 /**
@@ -107,30 +93,41 @@ configWxJssdk(shareUrl)
  * @shareImage 分享图标
  * @title 分享标题
  */
-function wxReadyConfig (params = '') {
-  if (!baseInfo.isWxBrowser) {
-    return;
-  }
-  wx.ready(() => {
-    // 分享朋友及QQ
-    wx.updateAppMessageShareData({ 
-      title: params ? params.title : '易点药', // 分享标题
-      desc: params.desc ?params.desc :'吃药的事，一点就行', // 分享描述
-      link: params ? params.url : link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-      imgUrl: params ? params.shareImage : shareImage, // 分享图标
-      success: function () {
-        // 设置成功
-      }
-    });
-    // 分享到朋友圈及QQ空间
-    wx.updateTimelineShareData({ 
-      title: params ? params.title :'易点药', // 分享标题
-      link: params ? params.url : link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-      imgUrl: params ? params.shareImage : shareImage, // 分享图标
-      success: function () {
-        // 设置成功
-      }
-    });
-  });
-};
+// function wxReadyConfig (params = '') {
+//   if (!baseInfo.isWxBrowser) {
+//     return;
+//   }
+//   wx.ready(() => {
+//     // 分享朋友及QQ
+//     wx.updateAppMessageShareData({ 
+//       title: params ? params.title : '易点药', // 分享标题
+//       desc: params.desc ?params.desc :'吃药的事，一点就行', // 分享描述
+//       link: params ? params.url : link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+//       imgUrl: params ? params.shareImage : shareImage, // 分享图标
+//       success: function () {
+//         // 设置成功
+//       }
+//     });
+//     // 分享到朋友圈及QQ空间
+//     wx.updateTimelineShareData({ 
+//       title: params ? params.title :'易点药', // 分享标题
+//       link: params ? params.url : link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+//       imgUrl: params ? params.shareImage : shareImage, // 分享图标
+//       success: function () {
+//         // 设置成功
+//       }
+//     });
+//   });
+// };
 
+
+// 获取授权
+// function wxEmpower () {
+//   if (location.href.indexOf('localhost') > -1 || location.href.indexOf('192.168.74.115') > -1) { // 测试环境不授权
+//     return false;
+//   } else {
+//     // window.location.href = `https://www.edianyao.com/wechat/code?redirect=${url}/login`; // 生产环境的
+//     redirect = encodeURIComponent(`${url}/login?${redirect}`);
+//     window.location.href = `${wxUrl.wxEmpowerUrl}?redirect=${redirect}`; // 测试环境的
+//   }
+// }

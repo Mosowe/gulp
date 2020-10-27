@@ -26,6 +26,7 @@ function amap () {
 
 // 城市定位：只能定位到城市，不能到区，加入逆地理编码，不能获取准确的位置信息，
 // 因为经纬度（得到的是一个范围result.rectangle）处理后是城市中心点（本人设置）
+// 无感
 const getLngLatLocation = () => {
     AMap.plugin('AMap.CitySearch', function () {
         let citySearch = new AMap.CitySearch();
@@ -33,6 +34,9 @@ const getLngLatLocation = () => {
             if (status === 'complete' && result.info === 'OK') {
                 // 查询成功，result即为当前所在城市信息
                 console.log('通过ip获取当前城市：', result);
+                baseInfo.city = result.city
+                baseInfo.province = result.province
+                baseInfo.adcode = result.adcode
             }
         });
     });
