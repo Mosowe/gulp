@@ -103,7 +103,21 @@ function swiper () {
         transform: translateY(-${height}px);
       }
     }</style>`
-  document.getElementById('style').innerHTML =style
+  document.getElementById('style').innerHTML = style
+  window.addEventListener('resize', () => {
+    height = document.getElementById('swiper').getElementsByClassName('item')[0].getBoundingClientRect().height
+    style = `
+        <style>
+        @keyframes swiperMove{
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-${height}px);
+        }
+      }</style>`
+    document.getElementById('style').innerHTML = style
+  })
   setInterval(()=>{
     document.getElementById('swiper').classList.add('swiper-move')
     let t = setTimeout(()=>{

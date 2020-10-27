@@ -25,15 +25,7 @@ function clickOpen (type,index) {
 }
 // 点击红包弹框区的开按钮
 function btnOpen () {
-  document.getElementById('btnOpen').style.display = 'none'
-  document.getElementById('bg-top').classList.add('opening')
-  document.getElementById('bg-bottom').classList.add('opening')
-  let t2 = setTimeout(() => {
-    clearTimeout(t2);
-    document.getElementById('result-content').classList.add('result-open')
-    document.getElementById('close').style.display = 'block'
-    apiOpened(thisRed)
-  }, 300);
+  apiOpened(thisRed)
 }
 // 点击关闭
 function closeDialog (type) {

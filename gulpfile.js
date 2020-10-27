@@ -48,7 +48,7 @@ gulp.task('less', function () {
   ]
   return gulp.src('src/less/*.less')
   .pipe(less())
-  .pipe(assetRev())
+  // .pipe(assetRev())
   .pipe(postcss(processors))
   // .pipe(cssmin())
   .pipe(gulp.dest('dist/css'))
@@ -77,7 +77,7 @@ gulp.task('imagemin', function() {
 // 重新载入html
 gulp.task('html', function () {
   return gulp.src('src/*.html')
-  .pipe(assetRev())
+  // .pipe(assetRev())
   .pipe(gulp.dest('dist'))
   .pipe(connect.reload());
 })

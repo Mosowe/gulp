@@ -23,7 +23,7 @@ function getRedRule () {
 }
 getRedRule()
 
-// 轮播
+// 轮播数据
 function getBroadcast () {
   let params = {
       url:baseInfo.apiUrl + apis.broadcast,
@@ -264,10 +264,10 @@ function apiOpened (index) {
               <div class="more-btns" onclick="closeDialog('red')">开心收下</div>
               <div class="get-now" onclick="gotoWallet()">立即提现></div>
             </div>`
-      // listRed[index - 1].content = res.data.amount
-      // listRed[index - 1].status = 2
-      // redListReset(listRed)
-      getRedDetail()
+      listRed[index - 1].content = res.data.amount
+      listRed[index - 1].status = 2
+      redListReset(listRed)
+      // getRedDetail()
       document.getElementById('btnOpen').style.display = 'none'
       document.getElementById('bg-top').classList.add('opening')
       document.getElementById('bg-bottom').classList.add('opening')
@@ -276,6 +276,14 @@ function apiOpened (index) {
         document.getElementById('result-content').classList.add('result-open')
         document.getElementById('close').style.display = 'block'
       }, 300);
+      
+      let hasRed = false
+      for (const item of listRed) {
+        if (item.status < 2) { // 还有未开启/未触发的红包
+          hasRed = true
+        }
+      }
+      hasRed ? '' : getRedDetail() // 无论红包发起时间是否到期，只要所有红包领完，就重新请求
     } else {
       toast('请求失败')
     }
@@ -588,7 +596,7 @@ function login () {
           let t = setTimeout(() => {
             clearTimeout(t)
             location.reload()
-          }, 2000);
+          }, 1600);
           return
         }
         location.reload()
