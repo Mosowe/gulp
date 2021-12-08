@@ -1,1 +1,0 @@
-function ENV (){ return "test"};
